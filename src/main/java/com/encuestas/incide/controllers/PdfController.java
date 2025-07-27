@@ -37,7 +37,7 @@ public class PdfController {
     @Value("${openai.api-key}")
     private String openAiApiKey;
 
-    @Value("${routerai.key}")
+    @Value("${router.ai-key}")
     private String routerAiKey;
     private final String openAiEndpoint = "https://api.openai.com/v1/chat/completions";
 

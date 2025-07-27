@@ -13,6 +13,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-@Component
+@Service
 public class JasperReportGeneratorV7 {
 
     /**
@@ -52,12 +53,10 @@ public class JasperReportGeneratorV7 {
         BufferedImage logoImage = ImageIO.read(logoStream);
         parameters.put("logo", logoImage);
         parameters.put("stage", stage);
-        System.out.println(stage);
         String htmlParaJasper = htmlContent
                 .replaceAll("(?i)<strong>", "<b>")
                 .replaceAll("(?i)</strong>", "</b>");
         parameters.put("richText", addMarginToParagraphs(htmlParaJasper));  // 👈 clave: usar "richText"
-        System.out.println("Contenido HTML generado:\n" + addMarginToParagraphs(htmlParaJasper));
         // 5. Generar el informe con JREmptyDataSource
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 
