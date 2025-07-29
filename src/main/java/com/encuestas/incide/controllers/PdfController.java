@@ -30,7 +30,7 @@ import java.nio.file.Files;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000") // Cambia al dominio de tu frontendy
+@CrossOrigin(origins = {"http://localhost:3000", "https://ybs-ia.arrabalemprende.org"}) // Cambia al dominio de tu frontendy
 @RequestMapping("/pdf")
 public class PdfController {
 
@@ -46,6 +46,10 @@ public class PdfController {
     @Autowired
     private JasperReportGeneratorV7 jasperReportGeneratorV7;
 
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "OK_YBS";
+    }
     @PostMapping(value = "/incide", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadPdf(
             @RequestParam("file") MultipartFile file,
